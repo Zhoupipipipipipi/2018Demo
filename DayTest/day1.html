@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <script>
+    //写一个函数execTime, 参数：时间毫秒数，作用：什么都不做，但函数执行会耗时参数传递的毫秒数
+    function execTime(t) {
+        console.time('my_timer');
+        let time = new Date(new Date().getTime()+t);
+        while(new Date()<=time){
+        }
+        console.timeEnd('my_timer');
+    }
+    console.log(1);   //输出1
+    execTime(3000);   //运行3秒钟 my_timer: 3000.64013671875ms
+    console.log(2);   //3秒后输出2
+    </script>
+</body>
+</html>
