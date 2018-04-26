@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <script>
+    //用JS写出一个对象obj，使得obj.obj.obj.obj===obj
+    //也就是说，不管出现多少次.obj, 都得到obj
+    var obj = {};
+    obj.obj = obj;
+    console.log(obj.obj.obj.obj===obj);
+    //可以用堆内存去思考
+    </script>
+</body>
+</html>
