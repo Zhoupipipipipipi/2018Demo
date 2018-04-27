@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <script>
+    //写出一个函数fn，使得fn满足以下条件
+    //1. fn() === fn  2. fn.fn === fn
+    var fn = () =>{
+        fn.fn = fn;
+        return fn;
+    }
+    /* function fn(){
+        fn.fn = arguments.callee;
+        return arguments.callee;
+    } */
+    console.log(fn()===fn);
+    console.log(fn.fn === fn);
+    </script>
+</body>
+</html>
