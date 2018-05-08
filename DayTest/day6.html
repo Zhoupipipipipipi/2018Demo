@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <script>
+    //写出一个函数fn, 使得fn满足一下条件
+    //fn()=='a' fn()()=='b' fn()()()=='c'
+    /* function fn() {
+        var b = function(){
+            return "c";
+        }
+        b.valueOf = function(){
+            return 'b';
+        }
+        var a = function(){
+            return b;
+        }
+        a.valueOf = function(){
+            return 'a'
+        }
+        return a;
+    } */
+    // es6
+    function fn() {
+        let a = () => b
+        a.valueOf = () => 'a'
+        let b = () => 'c';
+        b.valueOf = () => 'b';
+        return a;
+    }
+    console.log(fn()=='a');
+    console.log(fn()()=='b');
+    console.log(fn()()()=='c');
+    </script>
+</body>
+</html>

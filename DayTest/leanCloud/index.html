@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="realtime.browser.js"></script>
+</head>
+<body>
+    <script>
+        var Realtime = AV.Realtime;
+        var realtime = new Realtime({
+            appId: 'wuIJIWJ4xANz1YL3132N1Ndc-gzGzoHsz',
+            appKey: 'BdX7PHze5TalmUdhotUuzsPG',
+            region: 'cn', // 美国节点为 "us"
+        });
+        console.log(realtime);
+        realtime.createIMClient('5aefb38ea22b9d00456e6f3e').then(function (person) {
+            /* person.getConversation('5aea813b1b69e6003ed1d7f3').then(function(conversation){
+                console.log(conversation.id);
+            }) */
+            person.getQuery().containsMembers(['5aefb38ea22b9d00456e6f3e']).find().then(function (conversations) {
+                // 默认按每个对话的最后更新日期（收到最后一条消息的时间）倒序排列
+                conversations.map(function (conversation) {
+                    console.log(conversation.lastMessageAt, conversation.members);
+                    conversation.queryMessages({
+                        limit: 10, // limit 取值范围 1~1000，默认 20
+                    }).then(function (messages) {
+                        for(var i = 0; i<messages.length; i++){
+                            console.log("messages[i]._lctext");
+                            console.log(messages[i]._lctext);
+                            // for(var j = 0; j<messages[i].length; j++){
+                            //     console.log("messages[i][j]._lctext");
+                            //     console.log(messages[i][j]._lctext);
+                            // }
+                        }
+                    }).catch(console.error.bind(console));
+                });
+            }).catch(console.error.bind(console));
+        })
+    </script>
+</body>
+</html>
