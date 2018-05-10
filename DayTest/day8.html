@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <script>
+    /* 
+    写一个byField函数，实现数组按名字、年纪、任意字段排序
+    */    
+    var users = [
+        { name: 'John', age: 20, company: "Jirengu" },
+        { name: 'Pete', age: 18, company: "Alibaba" },               
+        { name: 'Ann', age: 19, company: "Tencent"},
+    ]
+
+    function byField(type) {
+        return (a,b)=>{       
+            return a[type]>b[type];
+        }
+    }
+    // var s1 = users.sort(byField('company'));
+    var s2 = users.sort(byField('name'));
+    // var s3 = users.sort(byField('age'));
+    // console.log(s1);
+    console.log(s2);
+    // console.log(s3);
+    </script>
+</body>
+</html>
