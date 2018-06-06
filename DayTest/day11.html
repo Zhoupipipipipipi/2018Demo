@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <script>
+    /* 
+    写一个函数execTimes, 用于测试一个函数执行一定次数的时长
+    如：execTimes(sort, 1000)('hello')表示：执行sort函数1000次，sort的参数是'hello'
+    */
+   function execTimes(callback,time) {
+       return str => {
+            console.time('执行1000次，耗时');           
+            for(var i = 0; i<time; i++){
+               sort(str);
+            }  
+            console.timeEnd('执行1000次，耗时');                     
+       }
+   }
+   function sort(str){
+       return str.split('').sort().join('');
+   }
+   //执行 sort 1000 次，sort的参数是'hello'
+   execTimes(sort, 1000)('hello');
+   //输出 '执行1000次，耗时43ms'
+    </script>
+</body>
+</html>

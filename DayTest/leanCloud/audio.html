@@ -1,0 +1,50 @@
+$a=file_get_contents("./a.amr"); $b=base64_encode($a); // echo $b; // die; ?>
+
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <script src="audio.min.js"></script>
+</head>
+<script src="voice-2.0.js"></script>
+
+<script>  
+
+
+    audiojs.events.ready(function () {
+        var as = audiojs.createAll();
+    });  
+</script>
+
+<body>
+
+    <input type="button" value="play" id="playId" />
+    <input type="button" value="stop" id="stopId" />
+
+</body>
+<script type="text/javascript">  
+    function Audio2dataURL(path) {
+        plus.io.resolveLocalFileSystemURL(path, function (entry) {
+            entry.file(function (file) {
+                var reader = new plus.io.FileReader();
+                reader.onloadend = function (e) {
+                    console.log(e.target.result);
+                    alert(e.target.result)
+                };
+
+                reader.readAsDataURL(file);
+            }, function (e) {
+                mui.toast("读写出现异常: " + e.message);
+            })
+        })
+    }
+    /* RongIMLib.RongIMVoice.init();
+    document.getElementById("playId").onclick = function () {
+        RongIMLib.RongIMVoice.play("<?php echo $b;?>");
+    };
+    document.getElementById("stopId").onclick = function () {
+        RongIMLib.RongIMVoice.stop();
+    };   */
+</script>
+
+</html>

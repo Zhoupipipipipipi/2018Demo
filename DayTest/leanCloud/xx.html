@@ -1,0 +1,56 @@
+
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title>使用数据自我展示</title>
+    <link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css" />
+    <link rel="stylesheet" href="http://cache.amap.com/lbs/static/AMap.DrivingRender1120.css" />
+    <style>
+        #panel {
+            z-index: 999;
+            position: absolute;
+            background-color: white;
+            max-height: 100%;
+            overflow-y: auto;
+            right: 0;
+            width: 280px;
+        }
+    </style>
+    <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.6&key=3ff48d520b08f2e2f611ba082bfef149&plugin=AMap.Driving"></script>
+    <script type="text/javascript" src="http://cache.amap.com/lbs/static/DrivingRender1230.js"></script>
+    <script type="text/javascript" src="http://cache.amap.com/lbs/static/addToolbar.js"></script>
+</head>
+
+<body>
+    <div id="container"></div>
+    <div id="panel"></div>
+    <script type="text/javascript">
+        var map = new AMap.Map("container", {
+            resizeEnable: true
+        });
+        //驾车导航，您如果想修改结果展现效果，请参考页面：http://lbs.amap.com/fn/css-style/
+        var drivingOption = {
+            policy: AMap.DrivingPolicy.LEAST_TIME
+        };
+        var driving = new AMap.Driving(drivingOption); //构造驾车导航类
+        //根据起终点坐标规划驾车路线
+        driving.search([{ keyword: '四川省成都市双流区厦门路东段999号靠近中国西部国际博览城国际展览展示中心' }, { keyword: '四川省成都市锦江区华兴正街39号' }], function (status, result) {
+            console.log(result.routes[0].step);
+            var id = '5af42570a22b9d00459361a4';
+            var stepList = result.routes[0].step;
+            var arr = [];
+            for(var i = 0; i < stepList.length; i++){
+                var pathList = stepList[i].path;
+                for(var j = 0; j<pathList.length; j++){
+                    var item = [pathList[j].lng, pathList[j].lat];
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

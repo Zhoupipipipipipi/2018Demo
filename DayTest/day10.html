@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="js/mock.js"></script>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
+<body>
+    <input type="text" id="inputs" value="">
+    <button type="button" id="btnA">AAA</button>
+    <button type="button" id="btnB">BBB</button>
+    <script>
+        Mock.mock('/api2/seller', { id: 0, data: "apiDataseller" }).setup({timeout: 4000})
+        Mock.mock('/api2/goods', { code: 0, data: "apiDatagoods" })
+        Mock.mock('/api2/ratings', { code: 0, data: "apiDataratings" })
+        
+        var next = (function(){
+            var promise = Promise.resolve();
+            return function(url, dataType){
+                promise = promise.then(() => {
+                    return new Promise((resolve)=>{
+                        $.ajax({
+                            type: 'get',
+                            url,
+                            dataType,
+                            success(res) {
+                                console.log(res);
+                                $('#inputs').val(res.id);
+                                resolve();
+                            }
+                        })
+                    })
+                })
+            }
+        })();
+        $('#btnA').click(()=>{
+            next('/api2/seller','json')
+        })
+        $('#btnB').click(() => {
+            next('https://api.douban.com/v2/book/1220562','jsonp')
+        })
+        /* $('#btnA').click(function(){
+            $.ajax({
+                type: 'get',
+                url: '/api2/seller',
+                async: true,
+                dataType: 'json',
+                success: function(result){
+                    $('#inputs').val(result.data);    
+                }
+            })
+        })
+        $('#btnB').click(function(){
+            $.ajax({
+                type: 'get',
+                url: 'https://api.douban.com/v2/book/1220562',
+                async: true,
+                dataType: 'jsonp',
+                success: function (result) {
+                    $('#inputs').val(result.author);
+                }
+            })
+        }) */
+        /* $('button').click(function(){
+            let promise = Promise.resolve();
+            promise = promise.then(() =>{
+                return new Promise((resolve, reject) => {
+                    var A = {
+                        url: '/api2/seller',
+                        id: 'data',
+                        dataType: 'json'
+                    }
+                    var B = {
+                        url: 'https://api.douban.com/v2/book/1220562',
+                        id: 'author',
+                        dataType: 'jsonp'
+                    }
+                    var data = $(this).html() == 'AAA' ? A : B;
+                    console.log(data);
+                    // getData(data.url, data.id, data.dataType);
+                    $.ajax({
+                        type: 'get',
+                        url: data.url,
+                        dataType: data.dataType,
+                        success: function (result) {
+                            console.log(result);
+                            $('#inputs').val(result[data.id]);
+                        }
+                    })
+                    resolve();
+                })
+            }); */
+            /* let promise = new Promise((resolve, reject) => {
+                var A = {
+                    url: '/api2/seller',
+                    id: 'data',
+                    dataType: 'json'
+                }
+                var B = {
+                    url: 'https://api.douban.com/v2/book/1220562',
+                    id: 'author',
+                    dataType: 'jsonp'
+                }
+                var data = $(this).html() == 'AAA' ? A : B;
+                console.log(data);
+                resolve(data);
+                // getData(data.url, data.id, data.dataType);
+            })
+            promise.then((data) => {
+                console.log(data);
+                $.ajax({
+                    type: 'get',
+                    url: data.url,
+                    dataType: data.dataType,
+                    success: function (result) {
+                        console.log(result);
+                        $('#inputs').val(result[data.id]);
+                    }
+                })
+            }).catch(err => console.log(err)) */
+            /* function getData(url, id, dataType) {
+                $.ajax({
+                    type: 'get',
+                    url: url,
+                    async: true,
+                    dataType: dataType,
+                    success: function (result) {
+                        console.log(result);
+                        $('#inputs').val(result[id]);
+                    }
+                })
+            } */
+        // })
+    </script>
+</body>
+</html>
