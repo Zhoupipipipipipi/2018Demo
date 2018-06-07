@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <script>
+        /* 
+        请使用Javascript实现一个方法，该方法能够判断两个字符串是否匹配
+        使用上一关的execTimes方法测试你的方案执行10000次的时长，该方案是否是最优方案？
+        如果不是请给出优化方法，并说明时间复杂度，尽量使用ES6的语法。
+        */
+       //第一种方法
+       function isMatch(str1, str2){
+           if (str1.length != str2.length) {
+               return false;
+           }
+           let newStr1 = str1.split('').sort().join('');
+           let newStr2 = str2.split('').sort().join('');
+           return newStr1 == newStr2;
+       }
+       /* 
+       結果是true
+       执行1000次，耗时: 44.149169921875ms
+       結果是false
+       执行1000次，耗时: 0.695068359375ms
+       結果是false
+       执行1000次，耗时: 15.98388671875ms
+       結果是true
+       执行1000次，耗时: 18.3251953125ms
+       */
+
+       //第二种方法
+       function isMatch(str1, str2){
+           if (str1.length != str2.length) {
+               return false;
+           }
+           for(let i=0; i<str1.length; i++){
+               str2 = str2.replace(str1[i],'');
+           }
+           return !str2;   //判断str2是否为空 !""为true，!"bukong"为false
+       }
+
+       /* 
+       結果是true
+       执行1000次，耗时: 10.85986328125ms
+       結果是false
+       执行1000次，耗时: 1.010986328125ms
+       結果是false
+       执行1000次，耗时: 3.400146484375ms
+       結果是true
+       执行1000次，耗时: 4.7109375ms
+       */
+
+      //第三种方法
+        function isMatch(str1, str2) {
+            if (str1.length != str2.length) {
+                return false;
+            }
+            let hash = {};
+            for (let i = 0; i < str1.length; i++) {
+                let key = str1[i];
+                if(hash[key]){
+                    hash[key]++;
+                }
+                else{
+                    hash[key]=1;
+                }
+            }
+            for(var i = 0; i<str2.length; i++){
+                let key = str2[i];
+                if(!hash[key]){
+                    return false;
+                }
+                hash[key]--;
+            }
+            return true;   
+        }
+
+        /* 
+        結果是true
+        执行1000次，耗时: 18.500244140625ms
+        結果是false
+        执行1000次，耗时: 0.68408203125ms
+        結果是false
+        执行1000次，耗时: 9.183837890625ms
+        結果是true
+        执行1000次，耗时: 8.401123046875ms
+        */
+
+       isMatch('something','ginhtemos');   //true
+       isMatch('aaa','aa');     //false
+       isMatch('abb','baa');    //fasle
+       isMatch('hello','olelh');        //true
+
+       function execTimes(callback, time) {
+            return (...str) => {
+                console.time('执行1000次，耗时');
+                for (let i = 0; i < time; i++) {
+                    callback(...str);
+                }
+                console.log(`結果是${callback(...str)}`);   //結果是true
+                console.timeEnd('执行1000次，耗时');  //执行1000次，耗时: 29.5810546875ms
+            }
+        }
+
+        execTimes(isMatch, 10000)('something', 'ginhtemos');
+        execTimes(isMatch, 10000)('aaa', 'aa');
+        execTimes(isMatch, 10000)('abb', 'baa');
+        execTimes(isMatch, 10000)('hello', 'olelh');
+    </script>
+</body>
+</html>
