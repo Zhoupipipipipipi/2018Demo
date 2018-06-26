@@ -42,3 +42,9 @@
 ### day12 
 ##### 请使用Javascript实现一个方法，该方法能够判断两个字符串是否匹配.使用上一关的execTimes方法测试你的方案执行10000次的时长，该方案是否是最优方案？如果不是请给出优化方法，并说明时间复杂度，尽量使用ES6的语法。
 ##### 总结：用了三种方法解决这个问题，第一种是先转为数组split('')，排序sort()，再转为字符串join('')。第二种方法是通过替换str2中的字符，如果结果str2为空，则返回!''即为true，否则返回!'xx'即为false。第三种是用哈希表存键值的方法判断，先存，然后去判断键值，减去。这三种方法中，第二种方法最快了。打印太多东西也没耗时间。散列表（Hash table，也叫哈希表），是根据关键码值(Key value)而直接进行访问的数据结构。
+
+### day17
+##### 总结：day16-17考察的是同一个知识点异步macrotask和microtask。从上面代码可以看出，Promise的函数代码的异步任务会优先于setTimeout的延时为0的任务先执行，原因是因为任务队列会分为microtask和macrotask，而promise中的then方法的函数会被推入到microtasks队列中，而setTimeout函数会被推入到macrotasks。任务队列中，在每一次事件循环中，macrotask只会提取一个执行，而microtask会一直提取，直到microsoft队列为空为止。
+##### 执行优先级的问题 microtasks > macrotasks
+##### macrotasks: script(整体代码),setTimeout, setInterval, setImmediate, I/O, UI rendering  
+##### microtasks: process.nextTick, Promises, Object.observe, MutationObserver
