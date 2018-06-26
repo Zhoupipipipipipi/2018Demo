@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+</head>
+<body>
+    <div class="father">
+        <div class="child">child</div>
+    </div>
+    <script>
+        $('.child').on('click', function(){
+            console.log(this);  //1.div .child
+        })
+        $('.father').on('click', '.child', function(){
+            console.log(this);   //5.div .child
+        })
+        $('.child')[0].onclick = function(){
+            console.log(this);  //4.div .child
+        }
+        var app = {
+            init: function(){
+                this.$father = $('.father')
+                this.$child = $('.child')
+                this.bind()
+            },
+            bind: function(){
+                var _this = this;
+                this.$father.on('click', this.sayHi)   //6.div.father
+                this.$child.on('click', function(){  
+                    _this.sayHello()  //2.app
+                })
+                this.$child.on('click',this.sayBey.bind(this))  //3.app
+            },
+            sayHi: function(){
+                console.log(this);  //app
+            },
+            sayHello: function(){
+                console.log(this);  //app                
+            },
+            sayBey: function(){
+                console.log(this);  //app
+            }
+        }
+        app.init()
+    </script>
+</body>
+</html>

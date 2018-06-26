@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <script>
+        /* 
+        封装一个jsonp方法，可以使用如下方式调用：
+        jsonp(url,[,data],[,callbackName])
+        */
+        jsonp('http://photo.sina.cn/aj/index',
+        {page:1, cate:'recommend'},'jsoncallback')
+        .then(data => {
+            console.log(data);
+        })
+
+        function jsonp(url,data,callback){
+            return new Promise((resolve, reject) => {
+                let _url = url + '?page=' + data.page + '&cate=' + data.cate+'&callback='+callback;
+                const callbackName = callback;
+                let head = document.getElementsByTagName('head')[0];
+                //设置传递给后台的回调参数名
+                let script = document.createElement('script');
+                head.appendChild(script);
+                //创建jsonp回调函数
+                window[callbackName] = json =>{
+                    resolve(json)
+                    head.removeChild(script);
+                    clearTimeout(script.timer);
+                    window[callbackName] = null;
+                }
+                //发送请求
+                script.src = _url;
+            })
+        };
+        /* function jsonp(url, data={}, callbackName='callback'){
+            data.callback = callbackName;
+            const queryArr = [];
+            for(key in data){
+                if(data.hasOwnProperty(key)){
+                    queryArr.push(`${key}=${data[key]}`);
+                }
+            }
+            const query = queryArr.join('&');
+            const script = document.createElement('script');
+            script.src = url+'?'+query;
+            document.body.appendChild(script);
+            return new Promise((resolve,reject)=>{
+                window[callbackName] = (json) =>{
+                    resolve(json);
+                    document.body.removeChild(script);
+                }
+            })
+        } */
+    </script>
+</body>
+</html>

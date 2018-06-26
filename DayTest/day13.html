@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <script>    
+        var app = {
+            fn1: function(){
+                console.log(this);
+            },
+            fn2: function(){
+                return function(){
+                    console.log(this);
+                }
+            },
+            fn3: function(){
+                function fn(){
+                    console.log(this);
+                }
+                fn();
+            },
+            fn4: function(){
+                return {
+                    fn: function(){
+                        console.log(this);
+                    }
+                }
+            },
+            fn5() {
+                setTimeout(function(){
+                    console.log(this);
+                }, 10)
+            },
+            fn6() {
+                setTimeout(()=>{
+                    console.log(this);
+                },20)
+            },
+            fn7(){
+                setTimeout((function(){
+                    console.log(this);
+                }).bind(this),30)
+            },
+            fn8: ()=> {
+                setTimeout(()=>{
+                    console.log(this);
+                },40)
+            }
+        }
+        app.fn1();   //app
+        app.fn2()();  //window
+        app.fn3();  //window
+        app.fn4().fn();  //fn
+        app.fn5();  //window
+        app.fn6(); //app
+        app.fn7(); //app
+        app.fn8();  //window
+    </script>
+</body>
+</html>
