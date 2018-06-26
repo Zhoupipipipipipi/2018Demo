@@ -45,6 +45,6 @@
 
 ### day17
 ##### 总结：day16-17考察的是同一个知识点异步macrotask和microtask。从上面代码可以看出，Promise的函数代码的异步任务会优先于setTimeout的延时为0的任务先执行，原因是因为任务队列会分为microtask和macrotask，而promise中的then方法的函数会被推入到microtasks队列中，而setTimeout函数会被推入到macrotasks。任务队列中，在每一次事件循环中，macrotask只会提取一个执行，而microtask会一直提取，直到microsoft队列为空为止。
-##### 执行优先级的问题 microtasks > macrotasks
-##### macrotasks: script(整体代码),setTimeout, setInterval, setImmediate, I/O, UI rendering  
-##### microtasks: process.nextTick, Promises, Object.observe, MutationObserver
+执行优先级的问题 microtasks > macrotasks
+macrotasks: script(整体代码),setTimeout, setInterval, setImmediate, I/O, UI rendering  
+microtasks: process.nextTick, Promises, Object.observe, MutationObserver
