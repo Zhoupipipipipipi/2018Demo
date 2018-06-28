@@ -44,4 +44,7 @@
 ##### 总结：用了三种方法解决这个问题，第一种是先转为数组split('')，排序sort()，再转为字符串join('')。第二种方法是通过替换str2中的字符，如果结果str2为空，则返回!''即为true，否则返回!'xx'即为false。第三种是用哈希表存键值的方法判断，先存，然后去判断键值，减去。这三种方法中，第二种方法最快了。打印太多东西也没耗时间。散列表（Hash table，也叫哈希表），是根据关键码值(Key value)而直接进行访问的数据结构。
 
 ### day17
-##### 总结：day16-17考察的是同一个知识点异步macrotask和microtask。从上面代码可以看出，Promise的函数代码的异步任务会优先于setTimeout的延时为0的任务先执行，原因是因为任务队列会分为microtask和macrotask，而promise中的then方法的函数会被推入到microtasks队列中，而setTimeout函数会被推入到macrotasks。任务队列中，在每一次事件循环中，macrotask只会提取一个执行，而microtask会一直提取，直到microsoft队列为空为止。执行优先级的问题 microtasks > macrotasks。macrotasks: script(整体代码),setTimeout, setInterval, setImmediate, I/O, UI rendering  //////microtasks: process.nextTick, Promises, Object.observe, MutationObserver
+##### 总结：day16-17考察的是同一个知识点异步macrotask和microtask。从上面代码可以看出，Promise的函数代码的异步任务会优先于setTimeout的延时为0的任务先执行，原因是因为任务队列会分为microtask和macrotask，而promise中的then方法的函数会被推入到microtasks队列中，而setTimeout函数会被推入到macrotasks。任务队列中，在每一次事件循环中，macrotask只会提取一个执行，而microtask会一直提取，直到microsoft队列为空为止。执行优先级的问题 microtasks > macrotasks。macrotasks: script(整体代码),setTimeout, setInterval, setImmediate, I/O, UI rendering  //////microtasks: process.nextTick, Promises, Object.observe, MutationObserver  
+
+### day18
+##### 总结： 关于拷贝，因为数组和对象都是指向同一个的内存地址，如果修改会连同其它指向这个内存地址的变量一起改变，因此就可以用拷贝进行复制。拷贝可以分为浅拷贝和深拷贝，对于数组和对象这一类需要用深拷贝
