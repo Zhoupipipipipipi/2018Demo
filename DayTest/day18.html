@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <script>
+        /* 
+        写一个深拷贝函数deepCopyArray，实现数组的深拷贝
+        其中：数组可嵌套  数组元素只能是Number、Bolllean、String、Array类型之一
+        */
+       let arr = [1, 2, 3,[1, 2, 3,[1, 2, 3]]]
+       console.log(arr)
+       let arr2 = deepCopyArray(arr)
+       function deepCopyArray(arr){
+           const type = Object.prototype.toString.call(arr).slice(8,-1);
+           let obj
+           if(type=='Array'){
+               obj = []
+               for(let i = 0; i<arr.length; i++){
+                   let o = deepCopyArray(arr[i]);
+                   obj.push(o);
+               }
+           }
+           else{
+               obj = arr
+           }
+           return obj
+       }
+       arr2[3][0] = 4
+       console.log(arr2)
+    </script>
+</body>
+</html>
