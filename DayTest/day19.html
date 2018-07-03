@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <script>
+    /* 
+    给定整数n和m，写一个函数dispatch(n,m)，把1~n尽量平均地分成m个组
+    */
+   dispatch(6, 3)  //[[1,2],[3,4],[5,6]]
+   dispatch(9, 2)  //[[1,2,3,4,5],[6,7,8,9]]
+   function dispatch(n, m){
+       const a = Math.ceil(n/m);
+       let result = [];
+       let arr = [];
+       for(let i = 1; i<=n; i++){
+           arr.push(i)
+           let s = i%a;
+           if(s==0){
+               result.push(arr);
+               arr = [];
+           }
+       }
+       if(arr.length>0){
+           result.push(arr);
+       }
+       console.log(result);
+   }
+    </script>
+</body>
+</html>
