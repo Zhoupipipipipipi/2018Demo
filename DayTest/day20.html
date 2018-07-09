@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+    .cicle{
+        width: 15px;
+        height: 15px;
+        background: red;
+        border-radius: 50%;
+        position: fixed;
+    }
+    </style>
+</head>
+<body>
+    <div class="cicle" id="cicle"></div>
+    <script>
+        let circle = document.getElementById('cicle');
+        let onMouseDown = (e) =>{
+            let {clientX, clientY} = e
+            setPosition(clientX,clientY)
+            document.addEventListener('mousemove', onMouseMove)
+            document.addEventListener('mouseup', onMouseUp)
+        }
+        let onMouseMove = (e) => {
+            let {clientX, clientY} = e
+            setPosition(clientX, clientY)
+        }
+        let onMouseUp = (e) => {
+            document.removeEventListener('mousemove', onMouseMove)
+            document.removeEventListener('mouseup', onMouseUp)
+        }
+        let setPosition = (x, y) =>{
+            circle.style.left = `${x}px`
+            circle.style.top = `${y}px`
+        }
+        circle.addEventListener('mousedown', onMouseDown);
+    </script>
+</body>
+</html>

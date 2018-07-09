@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <script>
+    /* 
+    写出一个once函数，满足以下条件
+    once函数只接受一个参数fnParam, 这个函数必须是一个函数once函数返回一个函数fnResult
+    如果有人调用fnResult，则fnParam被执行 如果有人多次调用fnResult，则fnParam只被执行一次
+    */    
+    function once(fnParam){
+        let bool = false
+        return function(){
+            if(!bool){
+                fnParam()
+                bool = true   //闭包的概念，bool已经被存在内存流中了
+            }
+        }
+    }
+    let log1 = once(function(){
+        console.log(1);
+    })
+    log1();  // 打印1
+    log1();  // 不再打印1
+    log1();  // 不再打印1
+    log1();  // 不再打印1
+    </script>
+</body>
+</html>
