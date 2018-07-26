@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <script>
+    /* 
+    简单模拟vue的数据代理功能
+    */
+    function Vue(options){
+        let data = options.data
+        for(var key in data){
+            this[key] = data[key]
+        }
+        return this
+    }
+    let app = new Vue({
+        data: { message: 'hi', name: 'ss' }
+    })
+    console.log(app.message)
+    console.log(app.name)
+    </script>
+</body>
+</html>

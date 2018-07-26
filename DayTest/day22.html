@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <script>
+    /* 
+    写一个排序函数sort，满足以下条件
+    sort接收一个数组（数组里面只会含有正整数，最大数字约为200）
+    sort将该数组按从小到大的顺序排列
+    sort返回修改后的数组
+    对时间复杂度 空间复杂度均无要求，只要能排序不报错就行
+    */    
+    function sort(arr){
+        arr.sort((a,b)=>{
+            return a>b
+        })
+        return arr
+    }
+    let arr = [1,2,5,3,100,66,55]
+    sort(arr)
+    </script>
+</body>
+</html>

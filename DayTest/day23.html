@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <script>
+    /* 
+    给定一个排序数组，你需要再原地删除重复出现的元素，使得每个元素只能出现一次，返回移除后数组的新长度。
+    不要使用额外的数组空间，你必须在原地修改输入数组并在使用O(1)额外空间的条件下完成
+    示例：给定数组nums=[1,1,2,3,2,5]，函数应该返回新的长度4，并且原数组nums去除了重复出现的数组
+    */    
+    let nums=[1,1,2,3,2,5]
+    var reoveDuplicates = function(nums){
+        let obj = {}
+        for(let i = nums.length-1; i>=0; i--){
+            if(obj[nums[i]]!=undefined){
+                nums.splice(i,1)
+            }
+            else{
+                obj[nums[i]] = 1
+            }
+        }
+    }
+    reoveDuplicates(nums)
+    </script>
+</body>
+</html>
